@@ -229,7 +229,7 @@ if(WIN32)
 
 	set_target_properties(obs
 		PROPERTIES
-			OUTPUT_NAME "obs${_output_suffix}")
+			OUTPUT_NAME "Conversant Studio ${_output_suffix}")
 endif()
 
 target_link_libraries(obs
