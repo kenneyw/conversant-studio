@@ -36,6 +36,7 @@
 
 #include "qt-wrappers.hpp"
 #include "obs-app.hpp"
+#include "splash.hpp"
 #include "window-basic-main.hpp"
 #include "window-basic-settings.hpp"
 #include "window-license-agreement.hpp"
@@ -902,6 +903,7 @@ bool OBSApp::OBSInit()
 				portable_mode ? "true" : "false");
 
 		mainWindow = new OBSBasic();
+		Splash splash = Splash();
 
 		mainWindow->setAttribute(Qt::WA_DeleteOnClose, true);
 		connect(mainWindow, SIGNAL(destroyed()), this, SLOT(quit()));

@@ -41,6 +41,7 @@ depcomp
 install-sh
 Makefile.in
 Makefile
+Build-UI*
 
 #random useless file stuff
 *.dmg

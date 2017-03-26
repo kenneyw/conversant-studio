@@ -110,6 +110,7 @@ endif()
 set(obs_SOURCES
 	${obs_PLATFORM_SOURCES}
 	obs-app.cpp
+	splash.cpp
 	api-interface.cpp
 	window-basic-main.cpp
 	window-basic-filters.cpp
@@ -154,6 +155,7 @@ set(obs_SOURCES
 set(obs_HEADERS
 	${obs_PLATFORM_HEADERS}
 	obs-app.hpp
+	splash.hpp
 	platform.hpp
 	window-main.hpp
 	window-basic-main.hpp
