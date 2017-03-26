@@ -35,6 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QThread>
 
 #include "qt-wrappers.hpp"
+#include "obs-app.hpp"
 #include "splash.hpp"
 #include "crash-report.hpp"
 #include "platform.hpp"
@@ -62,22 +63,23 @@ public:
 
 Splash::Splash()
 {
+	stringstream name;
+
 	blog(LOG_INFO, "Loading splash");
+
 	QPixmap pixmap =
 		QPixmap::fromImage(QImage(":/res/images/splash.png"));
 	QSplashScreen splash(pixmap);
 
-	blog(LOG_INFO, "Loaded splash");
-
 	splash.show();
-	splash.showMessage(QObject::tr("Loading..."),
-		Qt::AlignLeft | Qt::AlignTop, Qt::black);
+	name << "Conversant Studio " << App()->GetVersionString(true);
+	splash.showMessage(QObject::tr(App()->GetVersionString(true).c_str()),
+		Qt::AlignRight | Qt::AlignBottom, Qt::red);
 
-	// Splash page is shown for 5 seconds
+	// shown for 5 seconds
 	I::sleep(5);
 }
 
 Splash::~Splash()
 {
-
 }

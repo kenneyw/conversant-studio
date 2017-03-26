@@ -116,7 +116,7 @@ public:
 	const char *GetLastLog() const;
 	const char *GetCurrentLog() const;
 
-	std::string GetVersionString() const;
+	std::string GetVersionString(bool useLibVersion = false) const;
 	bool IsPortableMode();
 
 	const char *InputAudioSource() const;

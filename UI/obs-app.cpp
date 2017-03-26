@@ -924,12 +924,17 @@ bool OBSApp::OBSInit()
 	}
 }
 
-string OBSApp::GetVersionString() const
+string OBSApp::GetVersionString(bool useLibVersion) const
 {
 	stringstream ver;
 
 #ifdef HAVE_OBSCONFIG_H
-	ver << OBS_VERSION;
+	if (useLibVersion)
+		ver << LIBOBS_API_MAJOR_VER << "." <<
+		LIBOBS_API_MINOR_VER << "." <<
+		LIBOBS_API_PATCH_VER;
+	else
+		ver << OBS_VERSION;
 #else
 	ver <<  LIBOBS_API_MAJOR_VER << "." <<
 		LIBOBS_API_MINOR_VER << "." <<
@@ -940,9 +945,9 @@ string OBSApp::GetVersionString() const
 
 #ifdef _WIN32
 	if (sizeof(void*) == 8)
-		ver << "64bit, ";
+		ver << "64 bit, ";
 
-	ver << "windows)";
+	ver << "Windows)";
 #elif __APPLE__
 	ver << "mac)";
 #elif __FreeBSD__
