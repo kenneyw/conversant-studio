@@ -36,6 +36,7 @@
 
 #include "qt-wrappers.hpp"
 #include "obs-app.hpp"
+#include "splash.hpp"
 #include "window-basic-main.hpp"
 #include "window-basic-settings.hpp"
 #include "window-license-agreement.hpp"
@@ -902,6 +903,7 @@ bool OBSApp::OBSInit()
 				portable_mode ? "true" : "false");
 
 		mainWindow = new OBSBasic();
+		Splash splash = Splash();
 
 		mainWindow->setAttribute(Qt::WA_DeleteOnClose, true);
 		connect(mainWindow, SIGNAL(destroyed()), this, SLOT(quit()));
@@ -922,12 +924,17 @@ bool OBSApp::OBSInit()
 	}
 }
 
-string OBSApp::GetVersionString() const
+string OBSApp::GetVersionString(bool useLibVersion) const
 {
 	stringstream ver;
 
 #ifdef HAVE_OBSCONFIG_H
-	ver << OBS_VERSION;
+	if (useLibVersion)
+		ver << LIBOBS_API_MAJOR_VER << "." <<
+		LIBOBS_API_MINOR_VER << "." <<
+		LIBOBS_API_PATCH_VER;
+	else
+		ver << OBS_VERSION;
 #else
 	ver <<  LIBOBS_API_MAJOR_VER << "." <<
 		LIBOBS_API_MINOR_VER << "." <<
@@ -938,9 +945,9 @@ string OBSApp::GetVersionString() const
 
 #ifdef _WIN32
 	if (sizeof(void*) == 8)
-		ver << "64bit, ";
+		ver << "64 bit, ";
 
-	ver << "windows)";
+	ver << "Windows)";
 #elif __APPLE__
 	ver << "mac)";
 #elif __FreeBSD__
@@ -1803,7 +1810,7 @@ int main(int argc, char *argv[])
 			exit(0);
 
 		} else if (arg_is(argv[i], "--version", "-V")) {
-			std::cout << "OBS Studio - " << 
+			std::cout << "Conversant Studio - " << 
 				App()->GetVersionString() << "\n";
 			exit(0);
 		}

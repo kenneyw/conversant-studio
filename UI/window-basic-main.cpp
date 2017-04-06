@@ -196,7 +196,7 @@ OBSBasic::OBSBasic(QWidget *parent)
 	installEventFilter(CreateShortcutFilter());
 
 	stringstream name;
-	name << "OBS " << App()->GetVersionString();
+	name << "Conversant Studio " << App()->GetVersionString();
 	blog(LOG_INFO, "%s", name.str().c_str());
 	blog(LOG_INFO, "---------------------------------");
 
@@ -3655,7 +3655,7 @@ void OBSBasic::UploadLog(const char *file)
 	obs_data_set_obj(files.get(), file, content.get());
 
 	stringstream ss;
-	ss << "OBS " << App()->GetVersionString()
+	ss << "Conversant Studio " << App()->GetVersionString()
 	   << " log file uploaded at " << CurrentDateTimeString();
 	obs_data_set_string(request.get(), "description", ss.str().c_str());
 	obs_data_set_bool(request.get(), "public", false);
@@ -4389,7 +4389,7 @@ void OBSBasic::on_settingsButton_clicked()
 
 void OBSBasic::on_actionWebsite_triggered()
 {
-	QUrl url = QUrl("https://obsproject.com", QUrl::TolerantMode);
+	QUrl url = QUrl("https://conversant.im", QUrl::TolerantMode);
 	QDesktopServices::openUrl(url);
 }
 
@@ -4982,9 +4982,9 @@ void OBSBasic::UpdateTitleBar()
 	const char *sceneCollection = config_get_string(App()->GlobalConfig(),
 			"Basic", "SceneCollection");
 
-	name << "OBS ";
+	name << "Conversant Studio ";
 	if (previewProgramMode)
-		name << "Studio ";
+		name << "";
 
 	name << App()->GetVersionString();
 	if (App()->IsPortableMode())
